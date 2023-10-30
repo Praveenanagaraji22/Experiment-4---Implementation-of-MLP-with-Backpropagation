@@ -117,8 +117,72 @@ Normalize our dataset.
 
 8. Finally, call the functions confusion_matrix(), and the classification_report() in order to evaluate the performance of our classifier.
 
-## PROGRAM 
+## PROGRAM :
+## DEVELOPED BY : PRAVEENA N
+## REG NO : 212222040122
+```
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+data=pd.read_csv("/content/IRIS (1).csv")
+data.head()
 
-## OUTPUT 
+name=["sepal_length","sepal_width","petal_length","petal_width"]
+x=data.iloc[:,0:4]
+y=data.select_dtypes(include=[object])
+x.head()
+y.head()
 
-## RESULT
+from sklearn import preprocessing
+label_encoder=preprocessing.LabelEncoder()
+data['species']=label_encoder.fit_transform(data['species'])
+data['species'].unique()
+
+from sklearn.model_selection import train_test_split
+x_train,x_test,y_train,y_test=train_test_split(x,y,test_size=0.20)
+from sklearn.preprocessing import StandardScaler
+scaler=StandardScaler()
+scaler.fit(x_train)
+x_train=scaler.transform(x_train)
+x_test=scaler.transform(x_test)
+
+from sklearn.metrics import classification_report, confusion_matrix
+from sklearn.neural_network import MLPClassifier
+mlp=MLPClassifier(hidden_layer_sizes=(10,10,10),max_iter=1000)
+mlp.fit(x_train,y_train.values.ravel())
+predictions=mlp.predict(x_test)
+print(predictions)
+
+print(confusion_matrix(y_test,predictions))
+print(classification_report(y_test,predictions))
+```
+
+
+## OUTPUT:
+data.head():
+
+![data head](https://github.com/Lavanyajoyce/Experiment-4---Implementation-of-MLP-with-Backpropagation/assets/119393514/e51dfb6c-43d2-4fe7-ac77-8d10f8f0a039)
+
+X.head():
+
+![x head](https://github.com/Lavanyajoyce/Experiment-4---Implementation-of-MLP-with-Backpropagation/assets/119393514/f3b1eb61-cddf-45e5-90f1-5a51e2c7ec73)
+
+Y.head():
+
+![y head](https://github.com/Lavanyajoyce/Experiment-4---Implementation-of-MLP-with-Backpropagation/assets/119393514/6105fff5-a56d-4a31-a06a-c9907838f815)
+
+Array:
+
+![array](https://github.com/Lavanyajoyce/Experiment-4---Implementation-of-MLP-with-Backpropagation/assets/119393514/74c42a9e-192e-456e-bcbc-03786cffe2b4)
+
+Printing the predictions:
+
+![prediction](https://github.com/Lavanyajoyce/Experiment-4---Implementation-of-MLP-with-Backpropagation/assets/119393514/3cb82b1a-c5e0-428a-b430-b2b40cbbbc1d)
+
+classification report():
+
+![cls report1](https://github.com/Lavanyajoyce/Experiment-4---Implementation-of-MLP-with-Backpropagation/assets/119393514/dd947f06-0af3-4adc-be2b-24e29b0a182a)
+![cls report 2](https://github.com/Lavanyajoyce/Experiment-4---Implementation-of-MLP-with-Backpropagation/assets/119393514/12bc4693-5610-4619-87c1-213f1aeefde4)
+
+## RESULT:
+Thus Implementation-of-MLP-with-Backpropagation problem is executed successfully.
